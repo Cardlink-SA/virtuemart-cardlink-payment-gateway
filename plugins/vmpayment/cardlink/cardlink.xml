@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment" method="upgrade">
+    <name>Cardlink Payment Gateway</name>
+    <creationDate>25/11/2022</creationDate>
+    <author>Cardlink</author>
+    <authorUrl>http://www.cardlink.gr</authorUrl>
+    <copyright>Copyright (C) 2022 Cardlink. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.0</version>
+    <description>Cardlink Payment Gateway allows you to accept payment through various schemes such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards on your website.</description>
+	<scriptfile>script.cardlink.php</scriptfile>
+    <files>
+        <filename plugin="cardlink">cardlink.php</filename>
+		<filename>index.html</filename>
+        <folder>language</folder>
+		<folder>cardlink</folder>
+	</files>
+	<languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_vmpayment_cardlink.ini</language>
+		<language tag="el-GR">language/el-GR/el-GR.plg_vmpayment_cardlink.ini</language>
+    </languages>
+	<updateservers>
+		<server type="extension" priority="1" name="Cardlink Payment Gateway"><![CDATA[https://wwww.web-expert.gr/updates/vmcardlink.xml]]></server>
+	</updateservers>
+    <params addpath="/plugins/vmpayment/cardlink/fields"/>
+    <params addpath="/plugins/vmpayment/cardlink/cardlink/fields"/>	
+	<params addpath="/administrator/components/com_virtuemart/elements">
+		<param class="level1" type="spacer" default="VMPAYMENT_CARDLINK_BASIC_PARAMS"/>
+		<param class="level1" type="spacer" default="VMPAYMENT_CARDLINK_LICENSENOTICE" />
+		<param type="text" name="licensekey" size="40" label="VMPAYMENT_CARDLINK_LICENSEKEY" default="" description="VMPAYMENT_CARDLINK_LICENSEKEY_DESC" />
+		<!-- <param name="licensekey" type="liveupdate" langPrefix="VMPAYMENT_CARDLINK" size="40" /> -->
+		<!-- CARDLINK settings -->
+		<param class="level1" type="spacer" default="VMPAYMENT_CARDLINK_SETTINGS" description="VMPAYMENT_CARDLINK_SETTINGS_DESC"/>
+		<param name="mid" type="text" size="80" default="" label="VMPAYMENT_CARDLINK_MERCHANTID"/>
+		<param name="secretkey" type="text" size="80" default="" label="VMPAYMENT_CARDLINK_SECRETKEY"/>
+		<param name="paytype" type="list" default="1" label="VMPAYMENT_CARDLINK_TYPE" description="VMPAYMENT_CARDLINK_TYPE_DESC">
+			<option value="1">VMPAYMENT_CARDLINK_TYPE_SALE</option>
+			<option value="2">VMPAYMENT_CARDLINK_TYPE_AUTHORIZATION</option>
+		</param>
+		<param name="version" type="list" default="1" label="VMPAYMENT_CARDLINK_VERSION" description="VMPAYMENT_CARDLINK_VERSION_DESC">
+			<option value="1">v1 (old merchant accounts)</option>
+			<option value="2">v2 (updated or new merchant accountd)</option>
+		</param>	
+		<param name="paymeth" type="list" default="auto" label="VMPAYMENT_CARDLINK_PAYMETH" description="VMPAYMENT_CARDLINK_PAYMETH_DESC">
+			<option value="auto">VMPAYMENT_CARDLINK_PAYMETH_AUTO_MASTERPASS</option>
+			<option value="card">VMPAYMENT_CARDLINK_PAYMETH_CARDONLY</option>
+		</param>
+		<param name="demoaccount" type="list" default="0" label="VMPAYMENT_CARDLINK_DEMO_ACCOUNT" description="VMPAYMENT_CARDLINK_DEMO_ACCOUNT_DESC">
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		<param name="allowinstallments" type="list" default="0" label="VMPAYMENT_CARDLINK_ALLOWINSTALMENTS" description="VMPAYMENT_CARDLINK_ALLOWINSTALMENTS_DESC">
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		<param name="nooption" type="list" default="0" label="VMPAYMENT_CARDLINK_NONINSTALLS_OPT" description="VMPAYMENT_CARDLINK_NONINSTALLS_OPT_DESC">
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		<param type="text" name="installments" size="50" label="VMPAYMENT_CARDLINK_INSTALMENTS" default="100:2,200:3,300:4,600:5,700:6" description="VMPAYMENT_CARDLINK_INSTALMENTS_DESC" />
+		<param name="jspos" type="list" default="1" label="VMPAYMENT_WINBANK_JS_PLACEMENT" description="VMPAYMENT_WINBANK_JS_PLACEMENT_DESC">
+			<option value="0">Static JS placement</option>
+			<option value="1">Dynamic JS placement</option>
+		</param> 
+		<field name="referenceid" type="list" default="order_number" label="Reference ID" description="">
+			<option value="order_number">Order Number</option>
+			<option value="virtuemart_order_id">Order ID</option>
+		</field>	
+		<!-- Order status -->
+		<param type="spacer" default="VMPAYMENT_CARDLINK_ORDER_STATUS_SECTION" description="VMPAYMENT_CARDLINK_ORDER_STATUS_SECTION_DESC"/>
+		<param name="status_pending" type="vmorderstate" scope="com_virtuemart" default="U" label="VMPAYMENT_CARDLINK_STATUS_PENDING" description="VMPAYMENT_CARDLINK_STATUS_PENDING_TIP"/>
+		<param name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" label="VMPAYMENT_CARDLINK_STATUS_SUCCESS" description="VMPAYMENT_CARDLINK_STATUS_SUCCESS_TIP"/>
+		<param name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X" label="VMPAYMENT_CARDLINK_STATUS_CANCEL" description="VMPAYMENT_CARDLINK_STATUS_CANCEL_TIP"/>
+		<param class="level1" type="spacer" default="VMPAYMENT_CARDLINK_OPTIONAL_PARAMS"/>
+
+		<!-- Restrictions -->
+		<param type="spacer" default="VMPAYMENT_CARDLINK_RESTRICTIONS_SECTION" description="VMPAYMENT_CARDLINK_RESTRICTIONS_SECTION_DESC"/>
+		<param name="countries" multiple="true" type="vmcountries" scope="com_virtuemart" default="" label="VMPAYMENT_CARDLINK_COUNTRIES" description="VMPAYMENT_CARDLINK_COUNTRIES_DESC"/>
+		<param name="min_amount" type="text" label="VMPAYMENT_CARDLINK_MIN_AMOUNT" description="VMPAYMENT_CARDLINK_MIN_AMOUNT_TIP"/>
+		<param name="max_amount" type="text" label="VMPAYMENT_CARDLINK_MAX_AMOUNT" description="VMPAYMENT_CARDLINK_MAX_AMOUNT_TIP"/>
+		<param name="publishup" type="calendar" default="" label="VMPAYMENT_CARDLINK_PUBLISH_UP" description="VMPAYMENT_CARDLINK_PUBLISH_UP_DESC"/>
+		<param name="publishdown" type="calendar" default="" label="VMPAYMENT_CARDLINK_PUBLISH_DOWN" description="VMPAYMENT_CARDLINK_PUBLISH_UP_DESC"/>
+
+		<!-- Currencies -->
+		<param type="spacer" default="VMPAYMENT_CARDLINK_CURRENCIES_SECTION" description="VMPAYMENT_CARDLINK_CURRENCIES_SECTION_DESC"/>
+		<param name="payment_currency" type="vmacceptedcurrency" default="47" label="VMPAYMENT_CARDLINK_CURRENCY" description="VMPAYMENT_CARDLINK_CURRENCY_DESC"/>
+
+		<!-- Discounts -->
+		<param type="spacer" default="VMPAYMENT_CARDLINK_DISCOUNT_FEE_SECTION"  description="VMPAYMENT_CARDLINK_DISCOUNT_FEE_SECTION_DESC"/>
+		<param name="cost_per_transaction" type="text" label="VMPAYMENT_CARDLINK_COST_PER_TRANSACTION" description="VMPAYMENT_CARDLINK_COST_PER_TRANSACTION_TIP"/>
+		<param name="cost_percent_total" type="text" label="VMPAYMENT_CARDLINK_COST_PERCENT_TOTAL" description="VMPAYMENT_CARDLINK_COST_PERCENT_TOTAL_TIP"/>
+		<param name="tax_id" type="vmtaxes" scope="com_virtuemart" label="VMPAYMENT_CARDLINK_TAX" description="VMPAYMENT_CARDLINK_TAX_TIP"/>
+
+		<!-- LAYOUT -->
+		<param type="spacer" default="VMPAYMENT_CARDLINK_LAYOUT_SECTION"  description="VMPAYMENT_CARDLINK_LAYOUT_SECTION_DESC"/>
+		<param name="payment_logos" type="vmfiles" scope="com_virtuemart" label="VMPAYMENT_CARDLINK_LOGOS" description="VMPAYMENT_CARDLINK_LOGOS_DESC" directory="/images/stories/virtuemart/payment" default="default" hide_default="1" hide_none="0" stripext="0" exclude="^_"/>
+
+		<param type="spacer" default="VMPAYMENT_CARDLINK_DEBUG_SECTION" description="VMPAYMENT_CARDLINK_DEBUG_SECTION_DESC"/>
+		<param name="debug" type="radio" default="0" label="VMPAYMENT_CARDLINK_DEBUG_SECTION">
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		<param name="log" type="radio" default="0" label="VMPAYMENT_CARDLINK_LOG"  description="VMPAYMENT_CARDLINK_LOG_DESC">
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+	</params>
+</extension>
