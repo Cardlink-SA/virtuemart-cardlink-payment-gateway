@@ -2,10 +2,10 @@
 /**
  * @package     GR Bank Payment Helper
  * @version     4.2
- * @company   	WEB EXPERT SERVICES LTD
- * @developer   Stergios Zgouletas <info@web-expert.gr>
- * @link        http://www.web-expert.gr
- * @copyright   Copyright (C) 2010 Web-Expert.gr All Rights Reserved
+ * @company   	Cardlink
+ * @developer   Cardlink
+ * @link        http://www.cardlink.gr
+ * @copyright   Copyright (C) 2022 Cardlink All Rights Reserved
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 defined('_JEXEC') or die('Restricted access');

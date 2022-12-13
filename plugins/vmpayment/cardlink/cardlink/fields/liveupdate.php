@@ -1,10 +1,10 @@
 <?php
 /**
-* @package     ACS - Joomla & VM 3
-* @author      WEB EXPERT SERVICES LTD https://www.web-expert.gr
-* @copyright   Copyright (c) 2016 WEB EXPERT SERVICES LTD. All rights reserved.
+* @package     Joomla
+* @author      Cardlink https://www.cardlink.gr
+* @copyright   Copyright (c) 2022 CARDLINK. All rights reserved.
 * @license     GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
-* @Developer   Stergios Zgouletas
+* @Developer   Cardlink
 */
 
 //ini_set('display_errors','On');
